@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>뷰를 사용한 web3-가나슈</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.7/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.2.23/vuetify.min.js"></script>
+</head>
+
+<body>
+  <v-app id="app">
+    <v-app-bar app color="#fcb69f" dark>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>vue-web3-ganache</v-toolbar-title>
+    </v-app-bar>
+    <v-content>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-card color="#fcb69f" class="mx-auto my-12" max-width="374">
+              <v-card-text>
+                <div class='metamask-info'>
+                  <p class="font-weight-black">Wallet</p>
+                  <v-select :items="myAccounts" label="이더계정" v-model="selectedAccount"></v-select>
+                  <p>잔액 : {{ myBalance }} eth</p>
+                  받을 계정 : <v-text-field label="To Accounts" v-model="receiveAccount"></v-text-field>
+                  <p>
+                    <h4>example</h4>
+                    ganache - 0x3e202A478209169320B1c57B8011EDa27145c44a<br>
+                    metamask - 0xBC68E68CDb2e6c5094E1a3AAF8283EC43f2AAA4d
+                  </p>
+                  송금 금액 : <v-text-field label="eth" v-model="sendEth"></v-text-field>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+            <v-btn @click="getAccounts">어카운트</v-btn>
+            <v-btn @click="getBalance">이더 잔액</v-btn>
+            <v-btn @click="sendBalance">이더 송금</v-btn>
+          </v-col>
+        </v-row>
+        <v-row v-if=recbool>
+          <v-col>
+            <v-card color="#fcb69f" class="mx-auto my-12" max-width="374">
+              <v-card-text>
+                <div class='metamask-info'>
+                  <p class="font-weight-black">영수증</p>
+                  <p>트랜잭션 해시 : {{ receipt.transactionHash }}</p>
+                  <p>블록 해시: {{ receipt.blockHash }}</p>
+                  <p>블록 넘버: {{ receipt.blockNumber }}</p>
+                  <p>보내는 주소: {{ receipt.from }}</p>
+                  <p>받는 주소: {{ receipt.to }}</p>
+                  <p>가스 사용량: {{ receipt.gasUsed }}</p>
+                  <p>컨트랙트 주소: {{ receipt.contractAddress }}</p>
+                </div>
+              </v-card-text>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
+</body>
+
+<script>
+  // typeof window.web3 === 'undefined' ? web3 = new Web3('http://localhost:7545') : web3 = new Web3(window.web3.currentProvider)
+  // const web3 = new Web3('http://192.168.0.6:7545')
+  // if(typeof window.web3 === 'undefined') {
+  //   web3 = new Web3('http://localhost:7545')
+  //   console.log('가나슈');
+  // } else {
+  //   web3 = new Web3(window.web3.currentProvider)
+  //   console.log(web3);
+  //   console.log('메타마스크');
+  // }
+  // console.log(web3)
+  
+</script>
+<script src="./index.js"></script>
+
+</html>
